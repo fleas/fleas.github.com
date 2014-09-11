@@ -16,7 +16,8 @@ echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
 echo 'eval "$(rbenv init -)"' >> ~/.bashrc
 source ~/.bashrc
 ```
-To test that rbenv has been installed 
+
+- To test that rbenv has been installed 
 
 ```
 $ type rbenv
