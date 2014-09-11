@@ -198,7 +198,7 @@ rake elasticsearch:update
 ```
 
 
-Start rails server, site should come up if everuthing is configured correctly.
+Start rails server, site should come up if everything is configured correctly.
 ```
 bundle exec rails s
 ```
