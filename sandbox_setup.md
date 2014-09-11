@@ -163,9 +163,10 @@ Doctor          Time: 00:00:18 ======================================= 1078/1078
 Region          Time: 00:00:01 ========================================= 329/329 100% Time: 00:00:01
 ZipcodePin      Time: 00:00:01 ======================================= 2120/2120 100% Time: 00:00:01
 ^@Time: 00:00:00                                                                    1/329 0%  ETA: 00:06:Time: 00:00:59 ============================================================== 329/329 100% Time:
+
 ...
 
-
+````
 Confirm 'rgeo' was installed correctly.
 
 ```
@@ -174,6 +175,7 @@ bundle exec rails console
 pry(main)> RGeo::Geos.supported?
 => true
 ```
+
 ```
 node install and node install gulp
 npm install
