@@ -1,15 +1,15 @@
-## SANDBOX SETUP (Ubuntu) - WeedMaps
+## WeedMaps SANDBOX SETUP ( Ubuntu ) 
 
 This doc is a starting point for packages needed to run Weedmaps in a "sandbox environment". It is based off of [local Server Setup Doc](https://github.com/GhostGroup/weedmaps/wiki/Local-development-server-setup)
 
-#### Ubuntu
+- basic Ubuntu setup
 ```
 apt-get install build-essential
 apt-get install libssl-dev libcurl4-openssl-dev libreadline-dev libffi-dev libxslt1-dev libyaml-dev
 sudo apt-get install git-core
 ```
 
-#### Rbenv install
+- Rbenv install
 ```
 git clone https://github.com/sstephenson/rbenv.git ~/.rbenv
 echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
@@ -23,7 +23,7 @@ $ type rbenv
 rbenv is a function
 ```
 
-#### install ruby-build and gem-rehash
+- install ruby-build and gem-rehash
 ```
 git clone https://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
 git clone https://github.com/sstephenson/rbenv-gem-rehash.git ~/.rbenv/plugins/rbenv-gem-rehash
@@ -34,26 +34,27 @@ NOTE: build failed for patch level 353, needed to patch ruby version and install
 curl -fsSL https://gist.githubusercontent.com/riocampos/b2669b26016207224f06/raw/readline.patch | CONFIGURE_OPTS='--disable-install-rdoc' ~/.rbenv/bin/rbenv install --patch 2.0.0-p353
 ```
 
-### install bundler
+- install bundler
 ```
 gem install bundler
 ```
 
-#### installing postgresql 9.3
+- installing postgresql 9.3 
+(see below for troubleshooting)
+
 ```
 apt-get install postgresql-server-9.3
 apt-get install postgresql-server-dev-9.3
 apt-get install libgeos++-dev
 ```
 
-#### installing postgis
+- installing postgis
+
 ```
 apt-get install postgresql-9.3-postgis-2.1 # Geographic objects support for PostgreSQL 9.3
-apt-get install postgresql-9.3-postgis-2.1-scripts # PostGIS for PostgreSQL 9.3 -- dummy package
-apt-get install postgresql-9.3-postgis-scripts - Geographic objects support for PostgreSQL 9.3 -- scripts
 ```
 
-#### install elasticsearch
+- install elasticsearch
 
 Download the .deb pkg :
 
@@ -69,29 +70,30 @@ Setting up elasticsearch (1.3.2) ...
 Adding system user `elasticsearch' (UID 109) ...
 Adding new user `elasticsearch' (UID 109) with group `elasticsearch' ...
 Not creating home directory `/usr/share/elasticsearch'.
-### NOT starting elasticsearch by default on bootup, please execute
+NOT starting elasticsearch by default on bootup, please execute
  sudo update-rc.d elasticsearch defaults 95 10
-### In order to start elasticsearch, execute
+In order to start elasticsearch, execute
  sudo /etc/init.d/elasticsearch start
 ```
 
-#### Start ES and chech status
+- Start ElasticSearch and check status
+Should return 200OK
 ```
 $ curl http://localhost:9200
 ```
 
-See notes below if you are having issues.
+See notes below for troubleshooting.
 
-### install redis and memcached
+- install redis and memcached
 ```
 sudo apt-get install redis-server
 sudo apt-get install memcached
 ```
-### Install node
+- Install node
 ```
 sudo apt-get install nodejs nodejs-dev
 ```
-# Setup postgres
+- Setup postgres
 
 ```
 su - postgres
@@ -99,15 +101,21 @@ createuser -d -r -s deploy
 createdb weedmaps_development -O deploy 
 ```
 
-# weedmaps app setup
+- weedmaps app setup
+
 ```
 git clone git@github.com:GhostGroup/weedmaps.git
 bundle install
 ```
+
+- Run data population tasks.
+
 ```
 bundle exec rake geoip:download_data
 ```
-Copy the config/database.yml.example file to your config/database.yml
+
+- Copy the config/database.yml.example file to your config/database.yml
+
 ```
 cp $APP_PATH/config/database.yml.example $APP_PATH/config/database.yml
 ```
@@ -116,7 +124,7 @@ cp $APP_PATH/config/database.yml.example $APP_PATH/config/database.yml
 bundle exec rake geoip:download_data
 ```
 
-Import the database (This may take a bit)
+- Import the database (This may take a bit)
 ```
 rake db:import 
 
