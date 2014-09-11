@@ -187,6 +187,17 @@ index elastisearch data
 ```
 rake elasticsearch:update
 ```
+
+
+Start rails server, site should come up if everuthing is configured correctly.
+```
+bundle exec rails s
+```
+
+create ssh tunnel if aws security setting don't allow port 3000 (which they probably don't)
+```
+  ssh -L 3000:127.0.0.1:3000  user@ec2-instance-blah...
+```
 ## NOTES: 
 
 postgresql : 
