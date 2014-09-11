@@ -209,9 +209,20 @@ create ssh tunnel if aws security setting don't allow port 3000 (which they prob
 ```
 ## NOTES: 
 
-postgresql : 
+#### Postgresql 
 
-When rake is run it uses "psql --host localhost" which will always prompt for a password, but since we are relying on pg auth as a local process i had to edit /etc/postgresql/9.3/main/pg_hba.conf and change the security setting for local to "trust". This issue seems to be specifc to Ubuntu PG packages. 
+When rake is run it uses "psql --host localhost" which will always prompt for a password, but since we are relying on pg auth as a local process i had to edit /etc/postgresql/9.3/main/pg_hba.conf and change the security setting for local to "trust". This issue seems to be specifc to Ubuntu PG packages.
+
+Comment out the lines at the bottom of the file and replace them with the following:
+
+```
+
+local   all             all                                      trust
+host    all             all              127.0.0.1/32            trust
+host    all             all              ::1/128                 trust
+``` 
+
+#### ElasticSearch
 
 When installing elastisearch with .deb pkg, I had to installed java packages >= 7. 
 
